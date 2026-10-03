@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11152b">
+<title>MI DESEO ERES TÚ 🐉❤️</title>
+<style>
+:root{
+  --orange:#ff8a18; --gold:#ffd34d; --blue:#1e73d8; --dark:#070914;
+  --card:rgba(14,19,43,.88); --text:#fff7e8; --muted:#d7d8e6; --pink:#ff5d91;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--text); background:radial-gradient(circle at 50% 0%,#17255a 0,#080a18 48%,#03040b 100%);
+  overflow-x:hidden;
+}
+button{font:inherit}
+#stars,#hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;width:3px;height:3px;background:white;border-radius:50%;opacity:.75;animation:twinkle 2.8s infinite alternate}
+@keyframes twinkle{to{opacity:.15;transform:scale(.5)}}
+.heart-float{position:absolute;font-size:18px;animation:floatUp 7s linear forwards;opacity:.8}
+@keyframes floatUp{from{transform:translateY(110vh) rotate(0);opacity:0}15%{opacity:.8}to{transform:translateY(-15vh) rotate(25deg);opacity:0}}
+section{position:relative;z-index:1;min-height:100vh;padding:70px 18px;display:flex;align-items:center;justify-content:center}
+.container{width:min(920px,100%);margin:auto}
+.card{
+  background:var(--card);border:1px solid rgba(255,211,77,.22);border-radius:28px;
+  padding:28px;box-shadow:0 18px 60px rgba(0,0,0,.4);backdrop-filter:blur(12px)
+}
+.hero{text-align:center}
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(255,138,24,.14);border:1px solid rgba(255,211,77,.35);color:#ffe6a0}
+h1{font-size:clamp(42px,11vw,86px);line-height:.95;margin:18px 0 12px;text-shadow:0 0 24px rgba(255,174,38,.35)}
+h2{font-size:clamp(30px,7vw,54px);margin:0 0 16px}
+h3{font-size:25px;margin:10px 0}
+p{font-size:18px;line-height:1.75;color:var(--muted)}
+.lead{font-size:21px}
+.btn{
+  border:0;border-radius:999px;padding:14px 22px;margin:8px;cursor:pointer;
+  color:#160d00;background:linear-gradient(135deg,#ffd34d,#ff8a18);
+  font-weight:800;box-shadow:0 8px 25px rgba(255,138,24,.25);transition:.2s transform
+}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.btn.secondary{color:white;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);box-shadow:none}
+.hidden{display:none!important}
+.dragonballs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0}
+.ball{
+  width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 32% 25%,#fff5a8 0 5%,#ffb51c 13%,#e65c00 70%,#8e2200);
+  border:2px solid #ffd34d;box-shadow:0 0 18px rgba(255,166,0,.4);color:#8b1800;font-weight:900
+}
+.ball.unlocked{animation:glow 1.3s infinite alternate}
+@keyframes glow{to{box-shadow:0 0 35px #ffd34d,0 0 60px rgba(255,138,24,.5);transform:translateY(-4px)}}
+.photo{
+  width:min(520px,100%);aspect-ratio:4/3;margin:20px auto;border-radius:22px;
+  border:2px dashed rgba(255,211,77,.5);display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(135deg,rgba(30,115,216,.18),rgba(255,138,24,.12))
+}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo span{padding:20px;text-align:center;color:#cfd2e1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.skill,.memory,.question{
+  padding:20px;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1)
+}
+.skill{cursor:pointer;transition:.2s}.skill:hover{transform:translateY(-3px);border-color:#ffd34d}
+.skill small{display:block;color:#bfc3d7;margin-top:6px}
+.gallery .memory{padding:10px;cursor:pointer}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:15px}
+.progress{height:7px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin:25px 0}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff8a18,#ffd34d);transition:width .5s}
+.question button{display:block;width:100%;text-align:left;margin:9px 0;padding:13px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.06);color:white;cursor:pointer}
+.question button.correct{border-color:#ffd34d;background:rgba(255,211,77,.18)}
+.question button.wrong{opacity:.55}
+.letter{white-space:pre-line;text-align:left}
+.final{text-align:center}
+.shenlong{font-size:80px;filter:drop-shadow(0 0 22px #38bdf8);animation:dragon 2.5s ease-in-out infinite}
+@keyframes dragon{50%{transform:translateY(-10px) scale(1.05)}}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:20;display:grid;place-items:center;padding:18px}
+.modal .card{max-width:600px;width:100%}
+.close{float:right}
+input[type=file]{display:none}
+.upload-label{display:inline-block;padding:11px 15px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);cursor:pointer}
+.music{position:fixed;right:12px;bottom:12px;z-index:10;background:rgba(8,10,24,.9);padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
+footer{position:relative;z-index:1;text-align:center;padding:30px;color:#aeb2c5}
+@media(max-width:560px){section{padding:55px 12px}.card{padding:20px;border-radius:22px}p{font-size:16px}.lead{font-size:18px}.ball{width:43px;height:43px}}
+</style>
+</head>
+<body>
+<div id="stars"></div><div id="hearts"></div>
+
+<section id="inicio">
+<div class="container hero">
+<div class="badge">🐉 Un pequeño regalo para mi guerrero favorito</div>
+<div class="dragonballs" aria-label="Siete esferas">
+<div class="ball">★</div><div class="ball">★★</div><div class="ball">★★★</div><div class="ball">★★★★</div><div class="ball">★★★★★</div><div class="ball">★★★★★★</div><div class="ball">★★★★★★★</div>
+</div>
+<h1>MI DESEO<br>ERES TÚ 🐉❤️</h1>
+<p class="lead">Feliz Día del Novio, mi caballero hermoso. 🧡</p>
+<p>Hoy quiero llevarte a una pequeña aventura…<br>Las 7 Esferas del Dragón guardan 7 pequeños pedacitos de nuestra historia.</p>
+<button class="btn" onclick="startAdventure()">🐉 COMENZAR LA AVENTURA</button>
+<p><small>La música comenzará cuando pulses el botón.</small></p>
+</div>
+</section>
+
+<main id="aventura" class="hidden">
+<section><div class="container"><div class="card">
+<h2>Hola, mi caballero hermoso. ❤️</h2>
+<p>Hoy quería regalarte algo diferente.</p>
+<p>Dicen que cuando las 7 Esferas del Dragón se reúnen, pueden conceder un deseo…</p>
+<p>Pero esta vez no quiero pedirle nada a Shenlong.</p>
+<p><strong>Porque mi deseo favorito ya se hizo realidad: encontrarte a ti. ❤️</strong></p>
+<div class="progress"><span id="progress"></span></div>
+<button class="btn" onclick="goTo('esfera1')">✨ DESCUBRIR LA PRIMERA ESFERA</button>
+</div></div></section>
+
+<section id="esfera1"><div class="container"><div class="card">
+<h2>ESFERA 1 ⭐</h2><h3>TU SONRISA</h3>
+<div class="photo"><span>📸 Aquí irá una fotografía de Ronal<br><small>Luego puedes reemplazar este espacio por su foto.</small></span></div>
+<p>Hay algo en tu sonrisa que siempre consigue cambiar mi día.</p>
+<p>No importa si estoy triste, cansada o preocupada… verte sonreír siempre consigue sacarme una sonrisa también.</p>
+<p><strong>Tu sonrisa es uno de mis lugares favoritos. ❤️</strong></p>
+<button class="btn" onclick="unlock(1);goTo('esfera2')">⭐ CONTINUAR</button>
+</div></div></section>
+
+<section id="esfera2"><div class="container"><div class="card">
+<h2>ESFERA 2 ⭐⭐</h2><h3>TU FORMA DE QUERERME</h3>
+<div class="photo"><span>📸 Aquí irá una fotografía de ustedes dos</span></div>
+<p>Me encanta la forma en la que me quieres.</p>
+<p>En tus pequeños detalles, en tus mensajes, en tus abrazos, en las veces que intentas hacerme sonreír y en la forma en que estás cuando más te necesito.</p>
+<p><strong>Gracias por quererme de una forma tan bonita. ❤️</strong></p>
+<button class="btn" onclick="unlock(2);goTo('esfera3')">⭐ CONTINUAR</button>
+</div></div></section>
+
+<section id="esfera3"><div class="container"><div class="card">
+<h2>ESFERA 3 ⭐⭐⭐</h2><h3>NUESTROS RECUERDOS</h3>
+<p>Cada fotografía guarda un momento. Y cada momento contigo se convirtió en un recuerdo que quiero guardar para siempre.</p>
+<div class="grid gallery">
+<div class="memory"><div class="photo" style="width:100%;margin:0"><span>📸 Foto 1</span></div></div>
+<div class="memory"><div class="photo" style="width:100%;margin:0"><span>📸 Foto 2</span></div></div>
+<div class="memory"><div class="photo" style="width:100%;margin:0"><span>📸 Foto 3</span></div></div>
+<div class="memory"><div class="photo" style="width:100%;margin:0"><span>📸 Foto 4</span></div></div>
+<div class="memory"><div class="photo" style="width:100%;margin:0"><span>📸 Foto 5</span></div></div>
+<div class="memory"><div class="photo" style="width:100%;margin:0"><span>📸 Foto 6</span></div></div>
+</div>
+<button class="btn" onclick="unlock(3);goTo('esfera4')">⭐ CONTINUAR</button>
+</div></div></section>
+
+<section id="esfera4"><div class="container"><div class="card">
+<h2>ESFERA 4 ⭐⭐⭐⭐</h2><h3>EL COMIENZO</h3>
+<div class="photo"><span>💋📸 Aquí irá nuestra fotografía del primer beso<br><strong>20 DE JULIO ❤️</strong></span></div>
+<h3>“Y pensar que todo comenzó con un beso…”</h3>
+<p>Ese día quizá no sabíamos todo lo que vendría después.</p>
+<p>Pero hoy, cuando miro hacia atrás, me encanta pensar que nuestra historia comenzó justamente así: con un beso que terminó significando muchísimo más de lo que imaginábamos.</p>
+<p><strong>Si pudiera volver a ese día… te volvería a dar ese beso. ❤️</strong></p>
+<button class="btn" onclick="unlock(4);goTo('esfera5')">⭐ CONTINUAR</button>
+</div></div></section>
+
+<section id="esfera5"><div class="container"><div class="card">
+<h2>ESFERA 5 ⭐⭐⭐⭐⭐</h2><h3>COSITAS QUE AMO DE TI</h3>
+<p>Toca cada habilidad de mi guerrero favorito. 🐉</p>
+<div class="grid">
+<div class="skill" onclick="showSkill('Cariñoso','Tienes una forma muy bonita de hacerme sentir querida.')">❤️ Cariñoso<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Atento','Notas detalles que para mí significan muchísimo.')">❤️ Atento<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Respetuoso','Admiro la forma en que respetas mis sentimientos y mi forma de ser.')">❤️ Respetuoso<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Divertido','Contigo nunca faltan momentos que me hagan sonreír.')">😂 Divertido<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Comprensivo','Gracias por intentar entenderme incluso cuando no encuentro las palabras.')">❤️ Comprensivo<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Amoroso','Tu cariño hace que los pequeños momentos se sientan especiales.')">❤️ Amoroso<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Fuerte','Admiro tu fuerza para seguir adelante.')">💪 Fuerte<small>Toca para descubrir</small></div>
+<div class="skill" onclick="showSkill('Valiente','Admiro la manera en que enfrentas tus propias batallas.')">🐉 Valiente<small>Toca para descubrir</small></div>
+</div>
+<button class="btn" onclick="unlock(5);goTo('esfera6')">⭐ CONTINUAR</button>
+</div></div></section>
+
+<section id="esfera6"><div class="container"><div class="card">
+<h2>ESFERA 6 ⭐⭐⭐⭐⭐⭐</h2><h3>SIEMPRE VOY A CREER EN TI</h3>
+<p>Quiero que nunca olvides algo:</p>
+<p><strong>Yo creo en ti.</strong></p>
+<p>Creo en todo lo que puedes conseguir. Creo en tus sueños. Creo en tu esfuerzo. Creo en la persona que eres.</p>
+<p>Y aunque algún día dudes de ti mismo, quiero que recuerdes que siempre habrá alguien aquí animándote.</p>
+<p><strong>Tu fan número 1. ❤️</strong></p>
+<p>Siempre voy a estar orgullosa de ti.</p>
+<button class="btn" onclick="unlock(6);goTo('esfera7')">⭐ CONTINUAR</button>
+</div></div></section>
+
+<section id="esfera7"><div class="container"><div class="card">
+<h2>ESFERA 7 ⭐⭐⭐⭐⭐⭐⭐</h2><h3>TODO LO QUE NOS FALTA VIVIR</h3>
+<p>Todavía nos quedan muchísimas cosas por vivir.</p>
+<p>Más fotografías. Más risas. Más abrazos. Más lugares. Más aventuras. Más momentos que algún día podamos recordar.</p>
+<p><strong>No sé exactamente qué nos espera… pero sí sé con quién quiero descubrirlo.</strong></p>
+<p style="font-size:28px">Contigo. ❤️</p>
+<button class="btn" onclick="unlock(7);summon()">🐉 REUNIR LAS 7 ESFERAS</button>
+</div></div></section>
+
+<section id="deseo" class="hidden"><div class="container"><div class="card final">
+<div class="shenlong">🐉</div>
+<h2>LAS 7 ESFERAS HAN SIDO REUNIDAS…</h2>
+<p>Es hora de pedir un deseo. ✨</p>
+<h3>“¿Cuál sería tu deseo?”</h3>
+<div id="wish" class="hidden">
+<p style="font-size:26px">Mi deseo…</p>
+<p style="font-size:30px"><strong>Es seguir escribiendo nuestra historia contigo.</strong></p>
+<p>Porque mi deseo favorito ya se hizo realidad…</p>
+<p style="font-size:30px"><strong>Encontrarte a ti. 🥹❤️</strong></p>
+</div>
+<button class="btn" onclick="revealWish()">✨ REVELAR MI DESEO</button>
+</div></div></section>
+
+<section id="juego"><div class="container"><div class="card">
+<h2>🎮 ¿CUÁNTO CONOCES A TU NOVIA? ❤️</h2>
+<div id="quiz"></div>
+<p id="score" class="hidden"></p>
+</div></div></section>
+
+<section><div class="container"><div class="card">
+<h2>💌 UNA CARTA PARA MI GUERRERO FAVORITO</h2>
+<p class="letter">Mi caballero hermoso:
+
+No sé si existe una forma perfecta de explicar todo lo que siento por ti, pero quería intentarlo.
+
+Gracias por cada detalle, por cada palabra bonita, por cada sonrisa, por cada momento en el que has estado conmigo.
+
+Gracias por hacerme sentir querida y acompañada.
+
+Me encanta tu forma de ser, tu manera de querer, tu sonrisa, tus ocurrencias y hasta esas pequeñas cosas tuyas que te hacen ser tú.
+
+Me siento muy feliz de poder compartir esta historia contigo.
+
+Y quiero que sepas que estoy orgullosa de ti.
+
+No importa cuántas batallas tengas que enfrentar en la vida, siempre voy a estar animándote.
+
+Quiero seguir creando recuerdos contigo.
+
+Seguir riéndonos.
+Seguir abrazándonos.
+Seguir descubriendo lugares.
+Seguir viviendo momentos que algún día podamos recordar con una sonrisa.
+
+Gracias por existir en mi vida.
+
+Te amo muchísimo, mi guerrero favorito.
+
+Feliz Día del Novio. ❤️🐉
+
+Con todo mi amor,
+tu novia. ❤️</p>
+<button class="btn" onclick="goTo('sorpresa')">🎁 CONTINUAR</button>
+</div></div></section>
+
+<section id="sorpresa"><div class="container"><div class="card final">
+<h2>ESPERA…</h2>
+<p style="font-size:25px">Todavía queda una última sorpresa. 👀❤️</p>
+<button class="btn" onclick="openSurprise()">🐉 ABRIR ÚLTIMA SORPRESA</button>
+<div id="surprise" class="hidden">
+<div class="photo"><span>📸 Aquí irá nuestra fotografía especial</span></div>
+<p style="font-size:28px"><strong>Si pudiera volver al día en que te conocí…<br>te volvería a elegir.</strong></p>
+<p>Mi lugar favorito no es un lugar…</p>
+<p style="font-size:28px"><strong>Es donde estás tú. ❤️</strong></p>
+<button class="btn" onclick="goTo('final')">❤️ TERMINAR AVENTURA</button>
+</div>
+</div></div></section>
+
+<section id="final"><div class="container"><div class="card final">
+<h2>🏁 FIN DE ESTA AVENTURA</h2>
+<p style="font-size:25px">Pero nuestra historia…<br><strong>apenas sigue comenzando. ❤️</strong></p>
+<p>Todavía nos quedan muchos momentos por vivir.</p>
+<p>Muchas fotografías por tomar.</p>
+<p>Muchas aventuras por descubrir.</p>
+<p>Y muchísimos recuerdos por crear.</p>
+<h2>Te amo muchísimo,<br>mi caballero hermoso. ❤️🐉</h2>
+<p>Feliz Día del Novio, mi guerrero favorito. 🧡</p>
+<p><strong>Con amor,<br>tu novia, tu fan y tu compañera de aventuras. ❤️</strong></p>
+</div></div></section>
+</main>
+
+<div class="music">
+<button class="btn secondary" style="margin:0;padding:9px 14px" onclick="toggleMusic()">🎵 Música</button>
+<audio id="audio" loop preload="none"></audio>
+</div>
+
+<div id="modal" class="modal hidden" onclick="closeModal(event)">
+<div class="card">
+<button class="btn secondary close" onclick="closeModal()">✕</button>
+<h2 id="modalTitle"></h2><p id="modalText"></p>
+</div></div>
+
+<footer>Hecho con muchísimo amor. 🐉❤️</footer>
+
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<90;i++){
+  const s=document.createElement('span');s.className='star';
+  s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=(Math.random()*3)+'s';stars.appendChild(s);
+}
+function hearts(){
+  const h=document.createElement('span');h.className='heart-float';h.textContent=['❤️','🧡','✨','⭐'][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+'%';h.style.animationDuration=(5+Math.random()*4)+'s';
+  document.getElementById('hearts').appendChild(h);setTimeout(()=>h.remove(),9000);
+}
+setInterval(hearts,900);
+
+function startAdventure(){
+  document.getElementById('aventura').classList.remove('hidden');
+  document.getElementById('inicio').classList.add('hidden');
+  document.getElementById('audio').play().catch(()=>{});
+  goTo('aventura');
+}
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el){el.classList.remove('hidden');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'center'}),50)}
+}
+function unlock(n){
+  const balls=document.querySelectorAll('.ball');
+  if(balls[n-1]) balls[n-1].classList.add('unlocked');
+  document.getElementById('progress').style.width=(n/7*100)+'%';
+}
+function summon(){
+  document.getElementById('deseo').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('deseo').scrollIntoView({behavior:'smooth'}),300);
+  for(let i=0;i<30;i++)setTimeout(hearts,i*80);
+}
+function revealWish(){
+  document.getElementById('wish').classList.remove('hidden');
+  document.querySelector('#deseo .btn').classList.add('hidden');
+}
+function showSkill(title,text){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalText').textContent=text;
+  document.getElementById('modal').classList.remove('hidden');
+}
+function closeModal(e){
+  if(!e || e.target.id==='modal' || e.target.tagName==='BUTTON')document.getElementById('modal').classList.add('hidden');
+}
+function openSurprise(){
+  document.getElementById('surprise').classList.remove('hidden');
+}
+function toggleMusic(){
+  const a=document.getElementById('audio');
+  if(!a.src){alert('Para añadir tu canción en GitHub, coloca tu archivo de música en la misma carpeta y cambia la línea del audio en index.html.');return}
+  a.paused?a.play():a.pause();
+}
+const questions=[
+ ['¿Qué prefiero cuando estoy contigo?',['Abrazarte','Hacerte reír','Pasar tiempo contigo','Todas las anteriores ❤️'],3],
+ ['¿Qué quiero seguir acumulando contigo?',['Fotografías','Recuerdos','Aventuras','Todo lo anterior ❤️'],3],
+ ['¿Cuál sería mi plan favorito contigo?',['Ver un atardecer','Ver una película','Salir juntos','Cualquier lugar si estoy contigo ❤️'],3],
+ ['¿Quién es mi guerrero favorito?',['Goku','Vegeta','Gohan','Tú ❤️🐉'],3]
+];
+let qi=0,score=0;
+function renderQuiz(){
+  if(qi>=questions.length){
+    document.getElementById('quiz').innerHTML='<h3>🐉 ¡AVENTURA COMPLETADA!</h3>';
+    const sc=document.getElementById('score');sc.classList.remove('hidden');sc.textContent='Puntaje: '+score+'/'+questions.length+' ❤️';
+    return;
+  }
+  const q=questions[qi];let html='<div class="question"><h3>'+q[0]+'</h3>';
+  q[1].forEach((x,i)=>html+='<button onclick="answer('+i+')">'+x+'</button>');
+  html+='</div>';document.getElementById('quiz').innerHTML=html;
+}
+function answer(i){
+  const buttons=document.querySelectorAll('#quiz button');
+  buttons.forEach((b,idx)=>{b.disabled=true;if(idx===questions[qi][2])b.classList.add('correct');if(idx===i&&i!==questions[qi][2])b.classList.add('wrong')});
+  if(i===questions[qi][2])score++;
+  setTimeout(()=>{qi++;renderQuiz()},700);
+}
+renderQuiz();
+
+// Para usar una canción local en GitHub:
+// 1) sube tu archivo a una carpeta "media"
+// 2) cambia el src vacío por: media/tu-cancion.mp3
+// Ejemplo: document.getElementById('audio').src='media/melting.mp3';
+</script>
+</body>
+</html>
